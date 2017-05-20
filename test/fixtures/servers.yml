@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  hostname: MyString
+  ram_capacity: 1
+  current_ram_usage: 1
+  cores_available: 1
+  current_core_usage: 1
+
+two:
+  name: MyString
+  hostname: MyString
+  ram_capacity: 1
+  current_ram_usage: 1
+  cores_available: 1
+  current_core_usage: 1

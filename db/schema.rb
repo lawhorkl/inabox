@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419184521) do
+ActiveRecord::Schema.define(version: 20170519234411) do
+
+  create_table "servers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "hostname"
+    t.integer  "ram_capacity"
+    t.integer  "current_ram_usage"
+    t.integer  "cores_available"
+    t.integer  "current_core_usage"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
