@@ -1,3 +1,19 @@
 class Server < ApplicationRecord
-  validates :name, :hostname, :ram_capacity, :current_ram_usage, :cores_available, :current_core_usage, presence: true
+  validates :name, :hostname, :port, presence: true
+
+  def address 
+    if self.hostname.include?('http')
+      "#{self.hostname}:#{self.port}"
+    else
+      "http://#{self.hostname}:#{self.port}"
+    end
+  end
+
+  def ip
+    self.hostname.gsub('http://', '')
+  end
+
+  def reachable?
+    Net::Ping::External.new(self.ip).ping?  
+  end
 end

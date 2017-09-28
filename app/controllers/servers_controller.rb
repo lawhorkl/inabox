@@ -1,3 +1,5 @@
+require 'json'
+
 class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
 
@@ -12,6 +14,7 @@ class ServersController < ApplicationController
   # GET /servers/1
   # GET /servers/1.json
   def show
+    @server_stats = HTTParty.get("#{@server.address}/stats").parsed_response.symbolize_keys
   end
 
   # GET /servers/new
@@ -71,6 +74,6 @@ class ServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def server_params
-      params.require(:server).permit(:name, :hostname, :ram_capacity, :current_ram_usage, :cores_available, :current_core_usage)
+      params.require(:server).permit(:name, :hostname, :port)
     end
 end

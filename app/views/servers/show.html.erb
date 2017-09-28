@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Hostname:</strong>
-  <%= @server.hostname %>
+  <strong>Address:</strong>
+  <%= @server.address %>
 </p>
 
 <p>
@@ -28,6 +28,11 @@
 <p>
   <strong>Current core usage:</strong>
   <%= @server.current_core_usage %>
+</p>
+
+<p>
+  <strong>Active?</strong>
+  <%= @server.reachable? %>
 </p>
 
 <%= link_to 'Edit', edit_server_path(@server) %> |

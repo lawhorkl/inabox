@@ -7,6 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Hostname</th>
+      <th>Port</th>
       <th>Ram capacity</th>
       <th>Current ram usage</th>
       <th>Cores available</th>
@@ -19,6 +20,7 @@
     <% @servers.each do |server| %>
       <tr>
         <td><%= server.name %></td>
+        <td><%= server.port %></td>
         <td><%= server.hostname %></td>
         <td><%= server.ram_capacity %></td>
         <td><%= server.current_ram_usage %></td>
