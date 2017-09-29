@@ -1,5 +1,6 @@
 class Server < ApplicationRecord
   validates :name, :hostname, :port, presence: true
+  after_initialize :set_active
 
   def address 
     if self.hostname.include?('http')
@@ -13,7 +14,13 @@ class Server < ApplicationRecord
     self.hostname.gsub('http://', '')
   end
 
-  def reachable?
-    Net::Ping::External.new(self.ip).ping?  
+  def active?
+    self.active  
+  end
+
+  private
+
+  def set_active
+    self.active = true if self.active.nil?
   end
 end
