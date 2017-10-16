@@ -2,7 +2,7 @@
 
 <h1>Servers</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -20,8 +20,8 @@
     <% @servers.each do |server| %>
       <tr>
         <td><%= server.name %></td>
-        <td><%= server.port %></td>
         <td><%= server.hostname %></td>
+        <td><%= server.port %></td>
         <td><%= server.ram_capacity %></td>
         <td><%= server.current_ram_usage %></td>
         <td><%= server.cores_available %></td>
