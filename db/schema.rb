@@ -10,19 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929072033) do
+ActiveRecord::Schema.define(version: 20171018191725) do
 
   create_table "servers", force: :cascade do |t|
     t.string   "name"
     t.string   "hostname"
-    t.integer  "ram_capacity"
-    t.integer  "current_ram_usage"
-    t.integer  "cores_available"
-    t.integer  "current_core_usage"
+    t.bigint   "ram_capacity"
+    t.bigint   "current_ram_usage"
+    t.bigint   "cores_available"
+    t.bigint   "current_core_usage"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "port"
     t.boolean  "active"
+    t.bigint   "free_ram"
   end
 
   create_table "users", force: :cascade do |t|
