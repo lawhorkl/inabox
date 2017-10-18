@@ -14,12 +14,9 @@ class ServersController < ApplicationController
   # GET /servers/1
   # GET /servers/1.json
   def show
-    @server_stats = HTTParty.get("#{@server.address}/stats").parsed_response.symbolize_keys
-    byebug
-  rescue Errno::ECONNREFUSED
+    if @server.active == false
       flash[:alert] = "Server not accessible."
-      @server_stats = nil
-      @server.active = false
+    end
   end
 
   # GET /servers/new
