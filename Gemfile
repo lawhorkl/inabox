@@ -29,9 +29,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'httparty'
 gem 'net-ping'
-gem 'resque'
-gem 'resque-scheduler'
-
+gem 'sidekiq'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

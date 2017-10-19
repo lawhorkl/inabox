@@ -1,7 +1,7 @@
 class QueryApiJob < ApplicationJob
-  @queue = :default
-
-  def self.perform(*args)
+  queue_as :default
+  
+  def perform(*args)
     puts 'job started'
     @server = Server.find(args[0])
     server_stats = get_stats_from_server
@@ -13,14 +13,20 @@ class QueryApiJob < ApplicationJob
     @server.cores_available = server_stats[:cpu_stats][:cpu_cores]
     # @server.current_core_usage = server_stats
     puts 'success!' if @server.save
+    queue_next_query
   rescue Errno::ECONNREFUSED
     puts 'api down'
     @server.active = false
     @server.save
+    queue_next_query
   end
 
-  def self.get_stats_from_server
+  def get_stats_from_server
     puts 'get stats from server called'
     HTTParty.get("#{@server.address}/stats").parsed_response.deep_symbolize_keys
+  end
+
+  def queue_next_query
+    puts "next query queued for #{@server.name}" if QueryApiJob.set(wait: 30.seconds).perform_later(@server.id)
   end
 end
