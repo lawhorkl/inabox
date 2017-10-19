@@ -11,13 +11,14 @@
 </p>
 
 <p>
-  <strong>Ram capacity:</strong>
-  <%= @server.ram_capacity %>
+<strong>Ram capacity:</strong>
+  <% # byebug %>
+  <%= number_to_human_size @server.ram_capacity %>
 </p>
 
 <p>
   <strong>Current ram usage:</strong>
-  <%= @server.current_ram_usage %>
+  <%= number_to_human_size @server.current_ram_usage %>
 </p>
 
 <p>
