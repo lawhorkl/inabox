@@ -32,8 +32,8 @@
 </p>
 
 <p>
-  <strong>Active?</strong>
-  <%= @server.active? %>
+  <strong>InaBox Active?</strong>
+  <%= humanize_boolean @server.active? %>
 </p>
 
 <%= link_to 'Edit', edit_server_path(@server) %> |

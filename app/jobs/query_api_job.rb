@@ -9,7 +9,8 @@ class QueryApiJob < ApplicationJob
     @server.ram_capacity = server_stats[:ram_stats][:ram_capacity]
     @server.free_ram = server_stats[:ram_stats][:ram_free]
     @server.current_ram_usage = @server.ram_capacity - @server.free_ram
-    # @server.cores_available = server_stats
+    # byebug
+    @server.cores_available = server_stats[:cpu_stats][:cpu_cores]
     # @server.current_core_usage = server_stats
     puts 'success!' if @server.save
   rescue Errno::ECONNREFUSED
