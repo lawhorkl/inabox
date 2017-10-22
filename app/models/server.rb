@@ -1,5 +1,6 @@
 class Server < ApplicationRecord
   validates :name, :hostname, :port, presence: true
+  has_paper_trail
 
   def address 
     if self.hostname.include?('http')
