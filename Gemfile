@@ -27,9 +27,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'httparty'
-gem 'net-ping'
-gem 'sidekiq'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -55,3 +52,9 @@ gem 'devise'
 
 # Access control
 gem 'cancancan', '~> 1.10'
+
+# InaBox dependencies
+gem 'httparty'
+gem 'net-ping'
+gem 'sidekiq'
+gem 'paper_trail'
