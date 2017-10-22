@@ -32,9 +32,10 @@ class ServersController < ApplicationController
   # POST /servers.json
   def create
     @server = Server.new(server_params)
-
     respond_to do |format|
       if @server.save
+        QueryApiJob.perform_later(@server.id)
+        sleep 1
         format.html { redirect_to @server, notice: 'Server was successfully created.' }
         format.json { render :show, status: :created, location: @server }
       else
