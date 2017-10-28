@@ -57,3 +57,11 @@ gem 'devise'
 
 # Access control
 gem 'cancancan', '~> 1.10'
+
+# InaBox dependencies
+gem 'httparty'
+gem 'net-ping'
+gem 'sidekiq'
+gem 'paper_trail'
+gem 'bootstrap-sass'
+
