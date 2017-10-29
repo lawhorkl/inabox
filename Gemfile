@@ -61,4 +61,3 @@ gem 'paper_trail'
 gem 'bootstrap-sass'
 gem 'chartkick'
 gem 'groupdate'
-
