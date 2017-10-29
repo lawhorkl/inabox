@@ -27,11 +27,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'httparty'
-gem 'net-ping'
-gem 'resque'
-gem 'resque-scheduler'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -64,4 +59,6 @@ gem 'net-ping'
 gem 'sidekiq'
 gem 'paper_trail'
 gem 'bootstrap-sass'
+gem 'chartkick'
+gem 'groupdate'
 
