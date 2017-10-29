@@ -6,6 +6,11 @@
 .navbar {
   border: none;
   border-radius: 0;
+  margin-bottom: 0;
+}
+
+.alert {
+  border-radius: 0;
 }
 
 nav.navbar-default {

@@ -15,7 +15,7 @@ class ServersController < ApplicationController
   # GET /servers/1.json
   def show
     if @server.active == false
-      flash.now[:alert] = "Server not accessible."
+      flash.now[:error] = "Server not accessible."
     end
   end
 

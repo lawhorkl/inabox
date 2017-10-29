@@ -1,0 +1,6 @@
+<% flash.each do |key, value| %>
+<div class="alert alert-<%= bootstrap_alert key %> fade in alert-dismissable">
+  <%= value %>
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+</div>
+<% end %>
