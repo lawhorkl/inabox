@@ -1,0 +1,2 @@
+class ServerHistory < ApplicationRecord
+end

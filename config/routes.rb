@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :server_histories
   resources :servers
   devise_for :users
   root 'servers#index'

@@ -1,0 +1,2 @@
+module ServerHistoriesHelper
+end
