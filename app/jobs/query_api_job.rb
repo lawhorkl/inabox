@@ -5,14 +5,11 @@ class QueryApiJob < ApplicationJob
     puts 'job started'
     @server = Server.find(args[0])
     server_stats = get_stats_from_server
-    @server.active = true
-    @server.ram_capacity = server_stats[:ram_stats][:ram_capacity]
-    @server.free_ram = server_stats[:ram_stats][:ram_free]
-    @server.current_ram_usage = @server.ram_capacity - @server.free_ram
-    # byebug
-    @server.cores_available = server_stats[:cpu_stats][:cpu_cores]
-    # @server.current_core_usage = server_stats
-    puts 'success!' if @server.save
+    old_stats = {}
+    Server.attribute_names.each do |attr|
+      old_stats[attr.to_sym] = @server.send attr unless Server.not_tracked? attr
+    end
+    @server.update_and_save_history(old_stats, server_stats)
     queue_next_query
   rescue Errno::ECONNREFUSED
     puts 'api down'

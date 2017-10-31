@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20171029191601) do
     t.bigint   "free_ram"
     t.bigint   "cores_available"
     t.bigint   "current_core_usage"
+    t.boolean  "active"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["server_id"], name: "index_server_histories_on_server_id"
   end
 
   create_table "servers", force: :cascade do |t|

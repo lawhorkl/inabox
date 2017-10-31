@@ -1,7 +1,7 @@
 class CreateServerHistories < ActiveRecord::Migration[5.0]
   def change
     create_table :server_histories do |t|
-      t.integer :server_id
+      t.belongs_to :server, index: true
       t.string :name
       t.string :hostname
       t.integer :port
@@ -10,6 +10,7 @@ class CreateServerHistories < ActiveRecord::Migration[5.0]
       t.bigint :free_ram
       t.bigint :cores_available
       t.bigint :current_core_usage
+      t.boolean :active
 
       t.timestamps
     end
