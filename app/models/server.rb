@@ -19,17 +19,20 @@ class Server < ApplicationRecord
   end
 
   def update_and_save_history(current_stats)
-    byebug
+    self.update current_stats
+    self.server_histories.create self.attributes.except('id', 'created_at', 'updated_at')
   end
 
-  def self.not_tracked?(attribute)
-    %w[
-      id
-      name
-      hostname
-      port
-      updated_at
-      created_at
-    ].include? attribute
+  def convert_usage_to_gb
+    self.ram_capacity / (1024*1024*1024)
   end
+
+  def convert_usage_to_mb
+    self.ram_capacity / (1024*1024)
+  end
+
+  def convert_usage_to_kb
+    self.ram_capacity / (1024)
+  end
+
 end
