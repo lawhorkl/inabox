@@ -10,7 +10,6 @@
 
 <p>
 <strong>Ram capacity:</strong>
-  <% # byebug %>
   <%= number_to_human_size @server.ram_capacity %>
 </p>
 
@@ -33,6 +32,8 @@
   <strong>InaBox Active?</strong>
   <%= humanize_boolean @server.active? %>
 </p>
+
+<%= line_chart ServerHistory.where(server_id: @server.id).group_by_period(params[:period], :created_at).maximum(:usage_in_mb), max: @server.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
 
 <%= link_to 'Edit', edit_server_path(@server) %> |
 <%= link_to 'Back', servers_path %>
