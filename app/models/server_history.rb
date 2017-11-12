@@ -3,10 +3,20 @@ class ServerHistory < ApplicationRecord
   after_create :populate_conversions
 
   def populate_conversions
-    self.usage_in_gb = convert_to_gb
-    self.usage_in_mb = convert_to_mb
-    self.usage_in_kb = convert_to_kb
+    %w[gb mb kb].each { |size| eval "self.usage_in_#{size} = convert_to_#{size}" }
     self.save
+  end
+  
+  def convert_usage_to_gb
+    self.ram_capacity / (1024*1024*1024)
+  end
+
+  def convert_usage_to_mb
+    self.ram_capacity / (1024*1024)
+  end
+
+  def convert_usage_to_kb
+    self.ram_capacity / (1024)
   end
 
   private

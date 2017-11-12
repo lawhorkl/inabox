@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101164421) do
+ActiveRecord::Schema.define(version: 20171112051441) do
 
   create_table "server_histories", force: :cascade do |t|
     t.integer  "server_id"
@@ -34,15 +34,9 @@ ActiveRecord::Schema.define(version: 20171101164421) do
   create_table "servers", force: :cascade do |t|
     t.string   "name"
     t.string   "hostname"
-    t.bigint   "ram_capacity"
-    t.bigint   "current_ram_usage"
-    t.bigint   "cores_available"
-    t.bigint   "current_core_usage"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "port"
-    t.boolean  "active"
-    t.bigint   "free_ram"
   end
 
   create_table "users", force: :cascade do |t|

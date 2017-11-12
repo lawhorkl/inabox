@@ -19,8 +19,7 @@ class Server < ApplicationRecord
   end
 
   def update_and_save_history(current_stats)
-    self.update current_stats
-    self.server_histories.create self.attributes.except('id', 'created_at', 'updated_at')
+    self.server_histories.create current_stats
   end
 
   def convert_usage_to_gb
