@@ -21,11 +21,11 @@
         <td><%= server.name %></td>
         <td><%= server.hostname %></td>
         <td><%= server.port %></td>
-        <td><%= number_to_human_size server.ram_capacity %></td>
-        <td><%= number_to_human_size server.current_ram_usage %></td>
-        <td><%= server.cores_available %></td>
-        <td><%= server.current_core_usage %></td>
-        <td><%= humanize_boolean server.active? %></td>
+        <td><%= number_to_human_size server.server_histories.last.ram_capacity %></td>
+        <td><%= number_to_human_size server.server_histories.last.current_ram_usage %></td>
+        <td><%= server.server_histories.last.cores_available %></td>
+        <td><%= server.server_histories.last.current_core_usage %></td>
+        <td><%= humanize_boolean server.server_histories.last.active? %></td>
         <td><%= link_to 'Show', server %></td>
         <td><%= link_to 'Edit', edit_server_path(server) %></td>
         <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
