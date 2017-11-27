@@ -1,6 +1,7 @@
 .content-wrapper {
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 20px;
 }
 
 .navbar {
@@ -31,7 +32,7 @@ body > div.container-fluid.site-wrapper > nav > div > div.navbar-header > a {
   font-size: 15px;
 }
 
-#login-panel .panel-heading {
+.panel-default .panel-heading {
   background-color: red;
 }
 
@@ -41,18 +42,18 @@ body > div.container-fluid.site-wrapper > nav > div > div.navbar-header > a {
   margin-right: auto;
 }
 
-#login-panel .panel-heading > p {
+.panel-default .panel-heading > p {
   color: #fff;
   margin: 0;
 }
 
-#login-panel .panel-body #login-button {
+#login-button, #create-server {
   background-color: red;
   color: #fff;
   border: 1px solid red;
 }
 
-#user_email, #user_password, #login-button {
+#user_email, #user_password, #user_password_confirmation, #login-button, #server_name, #server_hostname, #server_port, #create-server {
   width: 100%;
   height: 40px;
   border-radius: 4px;

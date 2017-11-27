@@ -1,38 +1,44 @@
-<h1>Servers</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <p>Servers</p>
+  </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Hostname</th>
-      <th>Port</th>
-      <th>Ram capacity</th>
-      <th>Current ram usage</th>
-      <th>Cores available</th>
-      <th>Current core usage</th>
-      <th>InaBox Running?</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="panel-body">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Hostname</th>
+          <th>Port</th>
+          <th>Ram capacity</th>
+          <th>Current ram usage</th>
+          <th>Cores available</th>
+          <th>Current core usage</th>
+          <th>InaBox Running?</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @servers.each do |server| %>
-      <tr>
-        <td><%= server.name %></td>
-        <td><%= server.hostname %></td>
-        <td><%= server.port %></td>
-        <td><%= number_to_human_size server.server_histories.last.ram_capacity %></td>
-        <td><%= number_to_human_size server.server_histories.last.current_ram_usage %></td>
-        <td><%= server.server_histories.last.cores_available %></td>
-        <td><%= server.server_histories.last.current_core_usage %></td>
-        <td><%= humanize_boolean server.server_histories.last.active? %></td>
-        <td><%= link_to 'Show', server %></td>
-        <td><%= link_to 'Edit', edit_server_path(server) %></td>
-        <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @servers.each do |server| %>
+          <tr>
+            <td><%= server.name %></td>
+            <td><%= server.hostname %></td>
+            <td><%= server.port %></td>
+            <td><%= number_to_human_size server.server_histories.last.ram_capacity %></td>
+            <td><%= number_to_human_size server.server_histories.last.current_ram_usage %></td>
+            <td><%= server.server_histories.last.cores_available %></td>
+            <td><%= server.server_histories.last.current_core_usage %></td>
+            <td><%= humanize_boolean server.server_histories.last.active? %></td>
+            <td><%= link_to 'Show', server %></td>
+            <td><%= link_to 'Edit', edit_server_path(server) %></td>
+            <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <br>
 

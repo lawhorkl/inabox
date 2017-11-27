@@ -1,6 +1,11 @@
-<h1>Editing Server</h1>
+<div id="login-panel" class="panel panel-default">
+  <div class="panel-heading">
+    <p>Editing Server: <%= @server.name %></p>
+  </div>
+  <div class="panel-body">
+    <%= render 'form', server: @server %>
 
-<%= render 'form', server: @server %>
-
-<%= link_to 'Show', @server %> |
-<%= link_to 'Back', servers_path %>
+    <%= link_to 'Show', @server %> |
+    <%= link_to 'Back', servers_path %>
+  </div>
+</div>

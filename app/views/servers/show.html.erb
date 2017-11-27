@@ -1,40 +1,77 @@
-<p>
-  <strong>Name:</strong>
-  <%= @server.name %>
-</p>
+<div class="col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p>Server Information</p>
+    </div>
+    <div class="panel-body">
+      <p>Server Name: <%= @server.name %></p>
+      <p>Server Address: <%= @server.hostname %></p>
+      <p>Listening Port: <%= @server.port %></p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @server.address %>
-</p>
+<div class="col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p>Disk Information</p>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <p>Disk Count: <%= @latest_stats.disk_count %></p>
+          <p>Filesystem Type: <%= @latest_stats.filesystem %></p>
+          <p>Storage Capacity: <%= number_to_human_size @latest_stats.storage_capacity %></p>
+          <p>Free Space: <%= number_to_human_size @latest_stats.free_storage %></p>
+          <p>Percent Free: <%= ((@latest_stats.free_storage.to_f / @latest_stats.storage_capacity.to_f) * 100).truncate %>%</p>
+          <p>Mount Point: <%= "#{@latest_stats.mount_point}" %>
+        </div>
+        <div class="col-lg-8">
+          <%= image_tag "pie_chart.PNG", class: 'img-responsive', width: '200' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-<strong>Ram capacity:</strong>
-  <%= number_to_human_size @current_stats.ram_capacity %>
-</p>
+<div class="col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p>CPU Information</p>
+    </div>
+    <div class="panel-body">
+      <div class"row">
+        <div class="col-lg-4">
+          <p>CPU Count: <%= @latest_stats.cores_available %>
+          <p>clock Speed: 2.4Ghz</p>
+          <p>CPU Load: 12%</p>
+        </div>
+        <div class="col-lg-8">
+          <%= image_tag "pie-chart-1.PNG", class: 'img-responsive', width: '200' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Current ram usage:</strong>
-  <%= number_to_human_size @current_stats.current_ram_usage %>
-</p>
-
-<p>
-  <strong>Cores available:</strong>
-  <%= @current_stats.cores_available %>
-</p>
-
-<p>
-  <strong>Current core usage:</strong>
-  <%= @current_stats.current_core_usage %>
-</p>
-
-<p>
-  <strong>InaBox Active?</strong>
-  <%= humanize_boolean @current_stats.active %>
-</p>
-
-<%= line_chart ServerHistory.where(server_id: @server.id).group_by_period(params[:period], :created_at).maximum(:usage_in_mb), max: @current_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
-
+<div class="col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p>Memory Information</p>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <p>Memory Capacity: <%= number_to_human_size @latest_stats.ram_capacity %></p>
+          <p>Consumed Memory: <%= number_to_human_size @latest_stats.current_ram_usage %></p>
+          <p>Performance Chart: Memory Snapshot of the last week</p>
+        </div>
+        <div class="col-lg-8">
+          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:usage_in_mb), max: @latest_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
+        </div>
+    </div>
+  </div>
+</div>
 <%= link_to 'Edit', edit_server_path(@server) %> |
 <%= link_to 'Back', servers_path %>
 
