@@ -100,6 +100,7 @@ GEM
     minitest (5.10.3)
     multi_json (1.12.2)
     multi_xml (0.6.0)
+    mysql2 (0.4.10)
     net-ping (2.0.2)
     nio4r (2.1.0)
     nokogiri (1.8.1)
@@ -207,6 +208,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  mysql2
   net-ping
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
