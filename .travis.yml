@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.4.2
+before_script:
+  - rm config/database.yml
+  - mv config/travis.database.yml config/database.yml
+before_install:
+  - mysql -e 'CREATE DATABASE inabox_test;'
+script:
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec
+services:
+  - mysql

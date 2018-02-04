@@ -40,7 +40,6 @@ RSpec.describe ServersController, type: :controller do
 
       it 'should show the server show view' do
         get :show, id: server.id
-        byebug
         expect(response).to render_template :show
       end
     end
