@@ -72,3 +72,5 @@ gem 'sidekiq'
 gem 'bootstrap-sass'
 gem 'chartkick'
 gem 'groupdate'
+
+gem 'coveralls', require: false
