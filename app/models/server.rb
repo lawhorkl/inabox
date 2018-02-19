@@ -13,5 +13,8 @@ class Server < ApplicationRecord
   def update_and_save_history(current_stats)
     self.server_histories.create current_stats
   end
-
+  
+  def active?
+    self.server_histories.last.active
+  end
 end

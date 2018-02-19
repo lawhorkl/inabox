@@ -19,4 +19,5 @@ FactoryBot.define do
     hostname '127.0.0.1'
     port 3000
   end
+
 end
