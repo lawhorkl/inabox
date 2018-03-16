@@ -19,12 +19,16 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-lg-4">
-          <p>Disk Count: <%= @latest_stats.disk_count %></p>
-          <p>Filesystem Type: <%= @latest_stats.filesystem %></p>
-          <p>Storage Capacity: <%= number_to_human_size @latest_stats.storage_capacity %></p>
-          <p>Free Space: <%= number_to_human_size @latest_stats.free_storage %></p>
-          <p>Percent Free: <%= ((@latest_stats.free_storage.to_f / @latest_stats.storage_capacity.to_f) * 100).truncate %>%</p>
-          <p>Mount Point: <%= "#{@latest_stats.mount_point}" %>
+          <p>Disk Count: <%= @server.get_stat('disk_count') %></p>
+          <p>Filesystem Type: <%= @server.get_stat('filesystem') %></p>
+          <p>Storage Capacity: <%= number_to_human_size @server.get_stat('storage_capacity') %></p>
+          <p>Free Space: <%= number_to_human_size @server.get_stat('free_storage') %></p>
+          <% if @server.latest_stats.nil? %>
+            <p><%= Server.no_data_str %></p>
+          <% else %>
+            <p>Percent Free: <%= ((@server.get_stat('free_storage').to_f / @server.get_stat('storage_capacity').to_f) * 100).truncate %></p>
+          <% end %>
+          <p>Mount Point: <%= @server.get_stat('mount_point') %>
         </div>
         <div class="col-lg-8">
           <%= image_tag "pie_chart.PNG", class: 'img-responsive', width: '200' %>
@@ -42,7 +46,7 @@
     <div class="panel-body">
       <div class"row">
         <div class="col-lg-4">
-          <p>CPU Count: <%= @latest_stats.cores_available %>
+          <p>CPU Count: <%= @server.get_stat('cores_available') %>
           <p>clock Speed: 2.4Ghz</p>
           <p>CPU Load: 12%</p>
         </div>
@@ -62,12 +66,16 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-lg-4">
-          <p>Memory Capacity: <%= number_to_human_size @latest_stats.ram_capacity %></p>
-          <p>Consumed Memory: <%= number_to_human_size @latest_stats.current_ram_usage %></p>
+          <p>Memory Capacity: <%= number_to_human_size @server.get_stat('ram_capacity') %></p>
+          <p>Consumed Memory: <%= number_to_human_size @server.get_stat('current_ram_usage') %></p>
           <p>Performance Chart: Memory Snapshot of the last week</p>
         </div>
         <div class="col-lg-8">
-          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:usage_in_mb), max: @latest_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
+          <% if @server.latest_stats.nil? %>
+            <p><%= Server.no_data_str %></p>
+          <% else %>
+            <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:usage_in_mb), max: @server.latest_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
+          <% end %>
         </div>
     </div>
   </div>

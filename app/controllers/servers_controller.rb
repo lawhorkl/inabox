@@ -14,10 +14,7 @@ class ServersController < ApplicationController
   # GET /servers/1
   # GET /servers/1.json
   def show
-    @latest_stats = @server.server_histories.last
-    if @latest_stats.active == false
-      flash.now[:error] = "Server not accessible."
-    end
+    flash.now[:error] = "Server not accessible." unless @server.active?
   end
 
   # GET /servers/new
