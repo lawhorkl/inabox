@@ -14,13 +14,8 @@ class Server < ApplicationRecord
     end
   end
 
-  def update_and_save_history(current_stats)
-    self.server_histories.create current_stats
-  end
-  
   def active?
-    return false if @latest_stats.nil?
-    @latest_stats.active?
+    self.active
   end
 
   def get_stat(stat)

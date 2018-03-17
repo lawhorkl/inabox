@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127172529) do
+ActiveRecord::Schema.define(version: 20180317032217) do
 
   create_table "server_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "server_id"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20171127172529) do
     t.bigint   "free_ram"
     t.bigint   "cores_available"
     t.bigint   "current_core_usage"
-    t.boolean  "active"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "usage_in_gb"
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(version: 20171127172529) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "port"
+    t.boolean  "active"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
