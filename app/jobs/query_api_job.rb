@@ -2,11 +2,12 @@ class QueryApiJob < ApplicationJob
   queue_as :default
   
   def perform(*args)
-    @server = Server.find(args[0])
+    @server = Server.where(id: args[0]).first
     puts "Querying: #{@server.name} (ID: #{@server.id})"
     @server.server_histories.create get_stats_from_server
     @server.active = true
     @server.save
+    
     puts "Stats received from server #{@server.name}" 
   rescue Net::OpenTimeout
     puts "Server #{@server.name} (ID: #{@server.id}) physically down."
