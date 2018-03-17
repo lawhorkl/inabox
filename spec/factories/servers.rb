@@ -4,7 +4,6 @@ FactoryBot.define do
     current_ram_usage 2304305621
     free_ram 2000000000
     cores_available 2
-    active true
   end
   
   factory :server do
@@ -18,5 +17,6 @@ FactoryBot.define do
     sequence(:name) { |n| "Server #{n}" }
     hostname '127.0.0.1'
     port 3000
+    active true
   end
 end

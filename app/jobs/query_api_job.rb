@@ -2,23 +2,34 @@ class QueryApiJob < ApplicationJob
   queue_as :default
   
   def perform(*args)
-    puts 'job started'
     @server = Server.find(args[0])
-    @server.update_and_save_history get_stats_from_server
+    puts "Querying: #{@server.name} (ID: #{@server.id})"
+    @server.server_histories.create get_stats_from_server
+    @server.active = true
+    @server.save
+    puts "Stats received from server #{@server.name}" 
+    queue_next_query
+  rescue Net::OpenTimeout
+    puts "Server #{@server.name} (ID: #{@server.id}) physically down."
+    @server.active = false
+    @server.save
     queue_next_query
   rescue Errno::ECONNREFUSED
-    puts 'api down'
+    puts "Server accessible but API is down on #{@server.name} (ID: #{@server.id})."
     @server.active = false
     @server.save
     queue_next_query
   end
 
   def get_stats_from_server
-    puts 'get stats from server called'
-    HTTParty.get("#{@server.address}/stats").parsed_response.deep_symbolize_keys
+    HTTParty.get("#{@server.address}/stats", {timeout: 5}).parsed_response.deep_symbolize_keys
   end
 
   def queue_next_query
-    puts "next query queued for #{@server.name}" if QueryApiJob.set(wait: 30.seconds).perform_later(@server.id)
+    if QueryApiJob.set(wait: 30.seconds).perform_later(@server.id)
+      puts "Next query successfully queued for #{@server.name}"
+    else 
+      puts "Queueing next query for #{@server.name} (ID: #{@server.id}) failed."
+    end
   end
 end
