@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-lg-2">
   <div class="panel panel-default">
     <div class="panel-heading">
       <p>Server Information</p>
@@ -11,7 +11,29 @@
   </div>
 </div>
 
-<div class="col-lg-6">
+<div class="col-lg-10">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p>CPU Information</p>
+    </div>
+    <div class="panel-body">
+      <div class"row">
+        <div class="col-lg-4">
+          <p>CPU Count: <%= @server.get_stat('cores_available') %>
+          <p>CPU Load Average: <%= @server.get_stat('cpu_load_one') %></p>
+        </div>
+        <div class="col-lg-8">
+        <% if @server.latest_stats.nil? %>
+          <%= Server.no_data_str %>
+        <% else %>
+          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:cpu_load_one), max: 100, library: { elements: { point: { radius: 0 } } } %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-10 pull-right">
   <div class="panel panel-default">
     <div class="panel-heading">
       <p>Disk Information</p>
@@ -26,39 +48,23 @@
           <% if @server.latest_stats.nil? %>
             <p><%= Server.no_data_str %></p>
           <% else %>
-            <p>Percent Free: <%= ((@server.get_stat('free_storage').to_f / @server.get_stat('storage_capacity').to_f) * 100).truncate %></p>
+            <p>Percent Free: <%= "#{100 - @server.get_stat('disk_percentage')}%" %></p>
           <% end %>
           <p>Mount Point: <%= @server.get_stat('mount_point') %>
         </div>
         <div class="col-lg-8">
-          <%= image_tag "pie_chart.PNG", class: 'img-responsive', width: '200' %>
+        <% if @server.latest_stats.nil? %>
+          <%= Server.no_data_str %>
+        <% else %>
+          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:disk_percentage), max: 100, library: { elements: { point: { radius: 0 } } } %>
+        <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="col-lg-6">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <p>CPU Information</p>
-    </div>
-    <div class="panel-body">
-      <div class"row">
-        <div class="col-lg-4">
-          <p>CPU Count: <%= @server.get_stat('cores_available') %>
-          <p>clock Speed: 2.4Ghz</p>
-          <p>CPU Load: 12%</p>
-        </div>
-        <div class="col-lg-8">
-          <%= image_tag "pie-chart-1.PNG", class: 'img-responsive', width: '200' %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="col-lg-6">
+<div class="col-lg-10 pull-right">
   <div class="panel panel-default">
     <div class="panel-heading">
       <p>Memory Information</p>
@@ -71,12 +77,13 @@
           <p>Performance Chart: Memory Snapshot of the last week</p>
         </div>
         <div class="col-lg-8">
-          <% if @server.latest_stats.nil? %>
-            <p><%= Server.no_data_str %></p>
-          <% else %>
-            <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:usage_in_mb), max: @server.latest_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
-          <% end %>
+        <% if @server.latest_stats.nil? %>
+          <p><%= Server.no_data_str %></p>
+        <% else %>
+          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:usage_in_mb), max: @server.latest_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
+        <% end %>
         </div>
+      </div>
     </div>
   </div>
 </div>

@@ -40,7 +40,7 @@ class Server < ApplicationRecord
     servers = Server.all
     return false if servers.size == 0
     servers.each do |s|
-      if s.queue 30.seconds
+      if s.queue 20.seconds
         puts "Queueing query for #{s.name}, (ID: #{s.id})"
       else
         puts "Queueing query for #{s.name}, (ID: #{s.id} failed. See logs."

@@ -12,29 +12,29 @@
           <th>Port</th>
           <th>Ram capacity</th>
           <th>Current ram usage</th>
-          <th>Cores available</th>
-          <th>Current core usage</th>
+          <th>CPU core count</th>
+          <th>Current CPU load</th>
           <th>InaBox Running?</th>
           <th colspan="3"></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @servers.each do |server| %>
-          <tr>
-            <td><%= server.name %></td>
-            <td><%= server.hostname %></td>
-            <td><%= server.port %></td>
-            <td><%= number_to_human_size server.get_stat('ram_capacity') %></td>
-            <td><%= number_to_human_size server.get_stat('current_ram_usage') %></td>
-            <td><%= server.get_stat('cores_available') %></td>
-            <td><%= server.get_stat('current_core_usage') %></td>
-            <td><%= humanize_boolean server.active? %></td>
-            <td><%= link_to 'Show', server %></td>
-            <td><%= link_to 'Edit', edit_server_path(server) %></td>
-            <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
+      <% @servers.each do |server| %>
+        <tr>
+          <td><%= server.name %></td>
+          <td><%= server.hostname %></td>
+          <td><%= server.port %></td>
+          <td><%= number_to_human_size server.get_stat('ram_capacity') %></td>
+          <td><%= number_to_human_size server.get_stat('current_ram_usage') %></td>
+          <td><%= server.get_stat('cores_available') %></td>
+          <td><%= server.get_stat('cpu_load_one') %></td>
+          <td><%= humanize_boolean server.active? %></td>
+          <td><%= link_to 'Show', server %></td>
+          <td><%= link_to 'Edit', edit_server_path(server) %></td>
+          <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
       </tbody>
     </table>
   </div>
