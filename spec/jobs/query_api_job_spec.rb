@@ -3,8 +3,12 @@ require 'rails_helper'
 RSpec.describe QueryApiJob, type: :job do
   include ActiveJob::TestHelper
   
-  let!(:server) { create(:server, port: 3001, active: false) }
+  let!(:server) { create(:server, port: 3001) }
   subject(:job) { described_class.perform_later(server.id) }
+
+  before do
+    allow(Server).to receive(:find).with(server.id).and_return(server)
+  end
 
   after do
     clear_enqueued_jobs

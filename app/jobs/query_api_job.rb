@@ -2,7 +2,7 @@ class QueryApiJob < ApplicationJob
   queue_as :default
   
   def perform(*args)
-    @server = Server.where(id: args[0]).first
+    @server = Server.find(args[0])
     puts "Querying: #{@server.name} (ID: #{@server.id})"
     @server.server_histories.create get_stats_from_server
     @server.active = true
