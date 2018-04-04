@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317032217) do
+ActiveRecord::Schema.define(version: 20180319184038) do
 
   create_table "server_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "server_id"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20180317032217) do
     t.bigint   "free_ram"
     t.bigint   "cores_available"
     t.bigint   "current_core_usage"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "usage_in_gb"
     t.integer  "usage_in_mb"
     t.integer  "usage_in_kb"
@@ -33,6 +33,10 @@ ActiveRecord::Schema.define(version: 20180317032217) do
     t.bigint   "free_storage"
     t.string   "mount_point"
     t.integer  "block_size"
+    t.float    "cpu_load_one",       limit: 24, default: 0.0
+    t.float    "cpu_load_five",      limit: 24, default: 0.0
+    t.float    "cpu_load_fifteen",   limit: 24, default: 0.0
+    t.integer  "disk_percentage",               default: 0
     t.index ["server_id"], name: "index_server_histories_on_server_id", using: :btree
   end
 
