@@ -26,7 +26,7 @@
         <% if @server.latest_stats.nil? %>
           <%= Server.no_data_str %>
         <% else %>
-          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:cpu_load_one), max: 100, library: { elements: { point: { radius: 0 } } } %>
+          <%= line_chart server_cpu_chart_path, max: 100, library: { elements: { point: { radius: 0 } } } %>
         <% end %>
         </div>
       </div>
@@ -56,7 +56,7 @@
         <% if @server.latest_stats.nil? %>
           <%= Server.no_data_str %>
         <% else %>
-          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:disk_percentage), max: 100, library: { elements: { point: { radius: 0 } } } %>
+          <%= line_chart server_disk_chart_path, max: 100, library: { elements: { point: { radius: 0 } } } %>
         <% end %>
         </div>
       </div>
@@ -80,7 +80,7 @@
         <% if @server.latest_stats.nil? %>
           <p><%= Server.no_data_str %></p>
         <% else %>
-          <%= line_chart ServerHistory.where(server_id: @server.id).group_by_minute(:created_at).maximum(:usage_in_mb), max: @server.latest_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
+          <%= line_chart server_memory_chart_path, max: @server.latest_stats.convert_usage_to_mb, library: { elements: { point: { radius: 0 } } } %>
         <% end %>
         </div>
       </div>
