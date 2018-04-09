@@ -2,7 +2,6 @@ class Server < ApplicationRecord
   validates :name, :hostname, :port, presence: true
   has_many :server_histories, dependent: :destroy
   after_initialize :populate_latest_stats
-  after_create :queue
   attr_accessor :latest_stats
 
   @@no_data_str = "No data available."

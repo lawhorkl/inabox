@@ -7,6 +7,7 @@ class QueryApiJob < ApplicationJob
     @server.server_histories.create get_stats_from_server
     @server.active = true
     @server.save
+    
     puts "Stats received from server #{@server.name}" 
   rescue Net::OpenTimeout
     puts "Server #{@server.name} (ID: #{@server.id}) physically down."

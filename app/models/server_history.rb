@@ -3,8 +3,10 @@ class ServerHistory < ApplicationRecord
   after_create :populate_conversions
 
   def populate_conversions
-    %w[gb mb kb].each { |size| eval "self.usage_in_#{size} = convert_to_#{size}" }
-    self.save
+    unless self.current_ram_usage.nil?
+      %w[gb mb kb].each { |size| eval "self.usage_in_#{size} = convert_to_#{size}" }
+      self.save
+    end
   end
   
   def convert_usage_to_gb
