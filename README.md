@@ -59,5 +59,21 @@ git clone https://github.com/lawhorkl/inabox-api.git`
 ## What information does the API expose?
 Systems with the API installed expose the data collected by the Control Application. This data, which is mostly harmless from a security point of view and is still accessible to anyone with access to the `/stats` endpoint. InaBox currently does not include any sort of security measures between the Control Panel and API. If the communication between the two becomes more complex, excryption may be added between end points.
 
-To some, it may seem insane to not include encryption for any sort of API, but keep in mind *how* the API was built. the InaBox API does not ship with *any* ability to change or destroy parts of its host system. It is only capable of reading information and displaying it in a very *dumb* way, and by *dumb* I mean it does not access any part of the system which is sensitive while collecting this data, and there are no endpoints within the API or the Control Panel that permits the creation or destruction of database objects. The only way to cause a change in this system is to pass the authentication provided by [Devise](https://github.com/plataformatec/devise)
+To some, it may seem insane to not include encryption for any sort of API, but keep in mind *how* the API was built. the InaBox API does not ship with *any* ability to change or destroy parts of its host system. It is only capable of reading information and displaying it in a very *dumb* way, and by *dumb* I mean it does not access any part of the system which is sensitive while collecting this data, and there are no endpoints within the API or the Control Panel that permits the creation or destruction of database objects. The only way to cause a change in this system is to pass the authentication provided by [Devise](https://github.com/plataformatec/devise) within the Control Panel. This authentication for application users comes very highly configurable and even provides support for SSO systems. Consult Devise documentation for more.
+
+The API exposes these bits of information with a JSON string:
+* Ram capacity
+* Free ram (Computed per request)
+* Disk count
+* File system type
+* Block size
+* Storage capacity
+* Free storage (Computed per request)
+* Percentage of disk utilization (Computed per request)
+* Mount Point
+* CPU Core Count
+* CPU Load Averages for the last one, five, and fifteen minutes
+
+If you consider any of this to be security sensitive information, you should probably enable some encryption between the API and the Control Panel. It is a straight forward enough process to do, and the only real reason it hasn't been added yet is that it was out of scope for my senior design.
+
 ## Compatibility, Security, and Alternate APIs
