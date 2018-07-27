@@ -17,3 +17,10 @@ The Control Panel does the following functions and carries the following respons
 3. Makes periodic HTTP GET requests to every server whose metadata is listed in the database.
 4. Provides data storage for statistics gathered by using a server's metadata.
 5. Provides UI for monitoring any server within the database and displaying real-time HTML 5 graphs of collected data points.
+
+The API does the following functions and carries the following responsibilities:
+1. Collects data from the hardware of the machine and wrap it in ruby objects (via. [VMStat](https://github.com/threez/ruby-vmstat))
+2. Parses all this data into a ruby hash.
+3. Exposes this data in the form of a JSON string when the API endpoint `/stats` receives a GET request.
+
+The third, smaller part of the InaBox system is the Query Manager raketasks. These raketasks are tasks that run indefinitely, much like how the queueing engine `Resque` works. This query manager is the script that automates the Control Panel's HTTP requests to all servers in the database.
