@@ -51,7 +51,5 @@ git clone https://github.com/lawhorkl/inabox-api.git`
 2. Run bundler: `bundle install`
 3. Resolve any bundler issues (none known currently)
 4. Configure your database: InaBox supports anything the Rails ORM system does, so most commonly MySQL, PostgreSQL, etc. Even NoSQL databases like MongoDB. (Note: The API makes no use of a data layer, and so this step should be skipped when setting up the API.)
-5. Either (a) or (b). 
-a. Load the included schema: `bundle exec rake db:schema:load`
-b. Modify the data migrations to your requirements, and then run the migrations to generate a new schema: `bundle exec rake db:migrate`
+5. Choose (a) or (b). (a): Load the included schema: `bundle exec rake db:schema:load` (b): If you require more from the data layer, modify the data migrations to your requirements, and then run the migrations to generate a new schema: `bundle exec rake db:migrate`
 6. Start Sidekiq, Query Manager, and Application Server: These should be swtarted in a way that they can be backgrounded, obviously. Launching Sidekiq and the Query Manager is the same in development as production: `bundle exec sidekiq`, `bundle exec rake query:manager:start`, respectively. If you are running in development, you should be using the `rails server` command, while in production the Rails instance should be deployed with something like [Phusion Passenger](https://www.phusionpassenger.com/) or another method of deploying the Rails application with a full web server.
