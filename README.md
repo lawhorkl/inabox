@@ -50,7 +50,7 @@ So, continuing under the assumption that you've already sorted this out, and the
 git clone https://github.com/lawhorkl/inabox-api.git`
 2. Run bundler: `bundle install`
 3. Resolve any bundler issues (none known currently)
-4. Configure your database: InaBox supports anything the Rails ORM system does, so most commonly MySQL, PostgreSQL, etc. Even NoSQL databases like MongoDB.
+4. Configure your database: InaBox supports anything the Rails ORM system does, so most commonly MySQL, PostgreSQL, etc. Even NoSQL databases like MongoDB. (Note: The API makes no use of a data layer, and so this step should be skipped when setting up the API.)
 5.
 --1. Load the included schema: `bundle exec rake db:schema:load`
 --2. Or modify the data migrations to your requirements, and then run the migrations to generate a new schema: `bundle exec rake db:migrate`
