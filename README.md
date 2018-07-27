@@ -24,4 +24,6 @@ The API does the following functions and carries the following responsibilities:
 2. Parses all this data into a ruby hash.
 3. Exposes this data in the form of a JSON string when the API endpoint `/stats` receives a GET request.
 
-The third, smaller part of the InaBox system is the Query Manager raketasks. These raketasks are tasks that run indefinitely, much like how the queueing engine `Resque` works. This query manager is the script that automates the Control Panel's HTTP requests to all servers in the database.
+The third, smaller part of the InaBox system is the Query Manager raketasks. These raketasks are tasks that run indefinitely, much like how the queueing engine `Resque` works. This query manager is the script that automates the Control Panel's HTTP requests to all servers in the database. The query manager is essential to running this software. __If the query manager is not running, your control application is not collecting data!__
+
+The Query Manager is an unfortunate side effect of having a limited amount of time for a senior design project. Managing these queries can be handled more efficiently, but that will be discussed later in this readme.
