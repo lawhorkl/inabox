@@ -12,6 +12,7 @@ Another use case is for small developers that may have services spread across se
 ![image](https://user-images.githubusercontent.com/12615997/43338936-e0bad144-91a5-11e8-89cb-5589e6bb20fd.png)
 The InaBox system can be broken down into two parts: The web application that receives transmitted statistics from "slave" servers (aka. "Control Panel"), and the slave servers themselves which are running a compatible version of the [InaBox API](). The InaBox API is a small API that is created on Rails, which also uses the exact same stack as the Control Panel. The API contains __no create, update, or destroy__ capacity, making it a read-only system, and by extension giving potential actors no extra avenue of attack. This application also does not require root access natively. If the Ruby environment is not installed properly outside of the _sudo_ environment, you may still need root access to install either part of the system, but will not require continued sudo access after installation.
 
+### Control Panel
 The Control Panel does the following functions and carries the following responsibilities:
 1. Provides readable UI for adding servers to be monitored, editing those server's addresses, ports, or human readable names. 
 2. Provides data storage for server metadata(hostname, port, etc.)
@@ -19,12 +20,14 @@ The Control Panel does the following functions and carries the following respons
 4. Provides data storage for statistics gathered by using a server's metadata.
 5. Provides UI for monitoring any server within the database and displaying real-time HTML 5 graphs of collected data points.
 
+### API
 The API does the following functions and carries the following responsibilities:
 1. Collects data from the hardware of the machine and wrap it in ruby objects (via. [VMStat](https://github.com/threez/ruby-vmstat))
 2. Parses all this data into a ruby hash.
 3. Exposes this data in the form of a JSON string when the API endpoint `/stats` receives a GET request.
 
-The third, smaller part of the InaBox system is the Query Manager raketasks. These raketasks are tasks that run indefinitely, much like how the queueing engine `Resque` works. This query manager is the script that automates the Control Panel's HTTP requests to all servers in the database. The query manager is essential to running this software. __If the query manager is not running, your control application is not collecting data!__
+### Query Manager
+The third, smaller part of the InaBox system is the Query Manager rake tasks. These rake tasks are scripts that run indefinitely, much like how the queueing engine `Resque` works. This query manager is the script that automates the Control Panel's HTTP requests to all servers in the database. The query manager is essential to running this software. __If the query manager is not running, your control application is not collecting data!__
 
 To start the query manager, you should use a combination of a terminal multiplexer like `screen` or `tmux` and the rake commands. I personally recommend using `screen` to start a new terminal session, run the appropriate rake command, then Ctrl-A + D to detach from the now backgrounded query manager thread. You can reconnect using the command `screen -R`. At the risk of becoming a `screen` how-to, this readme will not go into further detail, but the process of using screen to manage multiple sessions is a very powerful tool, and if this seems scary to you, you should probably reference `man screen` and get yourself comfortable wih using it. But any way that enables you to run a command-line command and then background the process will work just fine.
 
