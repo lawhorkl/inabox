@@ -44,15 +44,10 @@ Reiterating the InaBox rule-of-thumb from earlier, for InaBox to work you need t
 1. You need to be able to ping the address of the slave box from the command-line of the control panel (external IP in cases of a gateway).
 2. The port the API is running on must be accessible (port forwarding from the external network IP to the internal IP of the API-enabled service in cases of a gateway.)
 
-So, continuing under the assumption that you've already sorted this out, and these two conditions are met, you would then clone the Control Panel (this repo) onto the box which will serve as your primary way of interacting with and monitoring the boxes that are configured for InaBox, and the [API]() onto the boxes that will be monitored.
-```
-git clone https://github.com/lawhorkl/inabox.git
-# or
-git clone https://github.com/lawhorkl/inabox-api.git
-```
-Next, as both applications run on the same stack, the next few parts are easy:
+So, continuing under the assumption that you've already sorted this out, and these two conditions are met, you would then clone the Control Panel (this repo) onto the box which will serve as your primary way of interacting with and monitoring the boxes that are configured for InaBox, and the [API]() onto the boxes that will be monitored. Since both applications run on the same stack, the next few parts are easy:
 
-1. Clone the repos.
+1. Clone the repos: `git clone https://github.com/lawhorkl/inabox.git` and `
+git clone https://github.com/lawhorkl/inabox-api.git`
 2. Run bundler: `bundle install`
 3. Resolve any bundler issues (none known currently)
 4. Configure your database: InaBox supports anything the Rails ORM system does, so most commonly MySQL, PostgreSQL, etc. Even NoSQL databases like MongoDB.
