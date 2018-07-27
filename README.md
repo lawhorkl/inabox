@@ -39,3 +39,7 @@ The Query Manager is an unfortunate side effect of having a limited amount of ti
 InaBox relies entirely on the HTTP network protocol and as such requires a few things in the network layer to be true. The first thing is for a networking port to be available for use by the slave server, while also being accessible to the control panel. The requirements for this change drastically depending on what the network your systems operate in look like, and whether or not the slave system and API are on the same network/subnet, or whether there is a gateway separating the two. 
 
 In the former case you should be able to communicate directly on whatever port the API is running on, while in the latter case of a gateway between the two, you will need either someone with network administrator access, or network administrator access yourself to configure a port forward for the API.
+
+Reiterating the InaBox rule-of-thumb from earlier, for InaBox to work you need two things:
+1. You need to be able to ping the address of the slave box from the commandline (external IP in cases of a gateway).
+2. The port the API is running on must be accessible (port forwarding from the external network IP to the internal IP of the API-enabled service in cases of a gateway.)
