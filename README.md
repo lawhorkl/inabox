@@ -34,3 +34,8 @@ To start the query manager, you should use a combination of a terminal multiplex
 The most basic query manager command is just: `bundle exec rake query:manager:start` but there are several other query manager commands used for cleaning the job queue. These other commands are destructive actions that clear out the Redis data store completely and they should be used with caution, only when neeeded.
 
 The Query Manager is an unfortunate side effect of having a limited amount of time for a senior design project. Managing these queries can be handled more efficiently, but that will be discussed later in this readme.
+
+## Installation Guide and Network Setup
+InaBox relies entirely on the HTTP network protocol and as such requires a few things in the network layer to be true. The first thing is for a networking port to be available for use by the slave server, while also being accessible to the control panel. The requirements for this change drastically depending on what the network your systems operate in look like, and whether or not the slave system and API are on the same network/subnet, or whether there is a gateway separating the two. 
+
+In the former case you should be able to communicate directly on whatever port the API is running on, while in the latter case of a gateway between the two, you will need either someone with network administrator access, or network administrator access yourself to configure a port forward for the API.
