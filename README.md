@@ -79,5 +79,28 @@ If you consider any of this to be security sensitive information, you should pro
 ## Compatibility and Alternate APIs
 InaBox was developed in the following environment:
 * Ubuntu 16.04 LTS / Raspbian Stretch Lite
-* Ruby 2.4.x
-* MySQL / PostgreSQL
+* Ruby 2.4.3
+* MySQL
+
+Both the Control Panel and the API have been tested on 2.4.0-2.4.3. 
+
+The [VMStat]() gem lists its compatibility as:
+FreeBSD
+MacOS X
+Linux (>= 2.6)
+OpenBSD
+NetBSD
+Solaris/SmartOS
+
+Any system that can run ruby 2.4 and meets the above criteria is compatible with the InaBox API.
+
+### Alternative APIs
+The InaBox Control Panel only seeks out a JSON string from the remote host. If you can provide this string with the scaling that the Control Panel is expecting, then it will work just as the InaBox API does.
+
+I have an idea about a windows-based API using ASP.NET for IIS servers but have not had the time to investigate it. If you have an idea for how to build something like this, do contact me!
+
+## Roadmap for the Future
+I built this application as I thought this would be a cool idea, and it happened to be a perfect fit for my senior design project at University. I often get ahead of myself and slap on features in the planning stage that aren't realistic in development, and so there are a lot of systems design that I theorized about and sketched out but it never made it to the actual coding stage. Instead, I began to build InaBox with the intention of building it like a framework, designing the base of the system and leaving it open to be expanded upon by organisations or individuals to cater to their own needs.
+
+Here are a few ideas that I had to change the system to function better:
+TODO
